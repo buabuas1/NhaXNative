@@ -1,13 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Image} from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import {createStackNavigator} from "@react-navigation/stack";
 import FilterHouseScreen from "./FilterScreen";
 import ListHouseScreen from "./ListHouseScreen";
 import HouseDetailScreen from "./HouseDetailScreen";
 import {RouterPath} from "../../constants/Router";
-
+import ItemService from "../../services/district.service";
 
 function MainScreen({ navigation }) {
     return (
@@ -33,18 +33,45 @@ function MainScreenStack() {
     );
 }
 
-export default function HouseScreen() {
-    return (
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-            <Text>Danh sách phòng theo Quận</Text>
-            <View style={styles.container}>
-                <Text></Text>
-                <Text>333333333333333333</Text>
-                <Text>333333333333333333</Text>
-            </View>
-            <MainScreenStack/>
-        </ScrollView>
-    );
+export default class HouseScreen extends React.Component {
+    constructor() {
+        super();
+        this.itemService = new ItemService();
+    }
+    callApi = () => {
+        this.itemService.getItem().then(() => {
+            console.log('Called');
+        })
+    }
+    componentDidMount(): void {
+        this.itemService.getItem().then(() => {
+            console.log('Called');
+        })
+    }
+
+    state = {
+        nameList: []
+    }
+    render() {
+        return (
+            <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+                <Text>Danh sách phòng theo Quận</Text>
+                <Image
+                    style={styles.tinyLogo}
+                    source={{
+                        uri: 'https://live.staticflickr.com/65535/49976871436_e40ef1e04f_o.jpg',
+                    }}
+                />
+                <View style={styles.container}>
+                    <Text></Text>
+                    <Text>333333333333333333</Text>
+                    <Text>333333333333333333</Text>
+                </View>
+                <Button title={'Call api'} onPress={this.callApi}/>
+                <MainScreenStack/>
+            </ScrollView>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
@@ -79,5 +106,9 @@ const styles = StyleSheet.create({
     displayNone: {
         height: 0,
         opacity: 0
-    }
+    },
+    tinyLogo: {
+        width: 150,
+        height: 150,
+    },
 });
