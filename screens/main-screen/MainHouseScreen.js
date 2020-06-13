@@ -1,41 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
-import {StyleSheet, Text, View, Button, Image, ImageBackground, TouchableOpacity, Dimensions} from 'react-native';
+import {StyleSheet,FlatList, Text, View, Button, Image, ImageBackground, TouchableOpacity, Dimensions} from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
-import {createStackNavigator} from "@react-navigation/stack";
-import FilterHouseScreen from "./FilterScreen";
-import ListHouseScreen from "./ListHouseScreen";
-import HouseDetailScreen from "./HouseDetailScreen";
 import {RouterPath} from "../../constants/Router";
 import DistrictService from "../../services/district.service";
-import {FlatList} from "react-native-web";
 import RoomService from "../../services/room.service";
-
-function MainScreen({ navigation }) {
-    return (
-        <View style={{ flex: 1}}>
-            <Button
-                title="Go to Profile"
-                onPress={() => navigation.navigate(RouterPath.FILTER_SCREEN)}
-            />
-        </View>
-    );
-}
-
-const Stack = createStackNavigator();
-
-function MainScreenStack() {
-    return (
-        <Stack.Navigator>
-            <Stack.Screen name={RouterPath.MAIN_SCREEN} component={MainScreen} options={{ title: '', headerStyle: styles.displayNone }}/>
-            <Stack.Screen name={RouterPath.FILTER_SCREEN} component={FilterHouseScreen} options={{ title: 'My home' }}/>
-            <Stack.Screen name={RouterPath.LIST_HOUSE_SCREEN} component={ListHouseScreen} options={{ title: 'My home' }}/>
-            <Stack.Screen name={RouterPath.HOUSE_DETAIL_SCREEN} component={HouseDetailScreen} options={{ title: 'My home' }}/>
-        </Stack.Navigator>
-    );
-}
-
-export default class HouseScreen extends React.Component {
+const roomWidth = 6;
+const roomHeight = 4;
+export default class MainHouseScreen extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -65,18 +37,18 @@ export default class HouseScreen extends React.Component {
         return (
             <ScrollView>
                 <View style={styles.container}>
-                    <Text style={styles.districtTitle}>Danh sách các quận</Text>
+                    <Text style={styles.districtTitle}>{'Danh sách các quận'}</Text>
                     <FlatList
                         data={this.state.districts}
-                        keyExtractor={this._keyExtractor}     //has to be unique
+                        keyExtractor={(item) => item._id}     //has to be unique
                         renderItem={({item}) => this.renderDistrict(item)} //method to render the data in the way you want using styling u need
                         horizontal={false}
                         numColumns={3}
                     />
-                    <Text style={styles.roomTitle}>Danh sách các phòng Hot</Text>
+                    <Text style={styles.roomTitle}>{'Danh sách các phòng Hot'}</Text>
                     <FlatList
                         data={this.state.rooms}
-                        keyExtractor={this._keyExtractor}     //has to be unique
+                        keyExtractor={(item) => item._id}     //has to be unique
                         renderItem={({item}) => this.renderRoom(item)} //method to render the data in the way you want using styling u need
                         horizontal={false}
                         numColumns={3}
@@ -91,7 +63,9 @@ export default class HouseScreen extends React.Component {
             <TouchableOpacity
                 key={item._id}
                 style={styles.item}
-                onPress={() => {}}
+                onPress={() => {this.props.navigation.navigate(RouterPath.LIST_HOUSE_SCREEN, {
+                    district: item
+                })}}
             >
                 <ImageBackground
                     style={styles.itemIcon}
@@ -113,7 +87,9 @@ export default class HouseScreen extends React.Component {
             <TouchableOpacity
                 key={item._id}
                 style={styles.room}
-                onPress={() => {}}
+                onPress={() => {this.props.navigation.navigate(RouterPath.HOUSE_DETAIL_SCREEN, {
+                    house: item
+                })}}
             >
                 <ImageBackground
                     // imageStyle={roomIcon}
@@ -123,9 +99,6 @@ export default class HouseScreen extends React.Component {
                         uri: 'https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg',
                     }}
                 >
-                    <Text style={styles.itemTitle}>
-                        {item.Name}
-                    </Text>
                 </ImageBackground>
                 <View>
                     <Text style={styles.descriptionRoom}>{item.Name}</Text>
@@ -181,7 +154,7 @@ const styles = StyleSheet.create({
     },
     room: {
         width: (Dimensions.get('window').width - 10) * 0.5,
-        height: (Dimensions.get('window').width + 150) * 0.5,
+        height: (Dimensions.get('window').width * 2) * 0.5 * roomHeight / roomWidth,
         flexGrow: 2,
         // padding: 2,
         margin: 3,
@@ -191,10 +164,10 @@ const styles = StyleSheet.create({
     },
     roomIcon: {
         width: (Dimensions.get('window').width - 10) * 0.5,
-        height: (Dimensions.get('window').width - 10) * 0.5,
+        height: (Dimensions.get('window').width - 10) * 0.5 * roomHeight / roomWidth,
         borderWidth: 1,
         borderColor: "black",
-        borderRadius: '10px',
+        borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
     },

@@ -6,10 +6,10 @@ const ENV = {
         apiUrl: "http://localhost:4040"
     },
     staging: {
-        apiUrl: prodUrl
+        apiUrl: "http://localhost:4040"
     },
     prod: {
-        apiUrl: prodUrl
+        apiUrl: "http://localhost:4040"
     }
 };
 

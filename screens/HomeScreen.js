@@ -1,60 +1,48 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import {Button, Image, Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {RouterPath} from "../constants/Router";
+import {createStackNavigator} from "@react-navigation/stack";
+import FilterHouseScreen from "./main-screen/FilterScreen";
+import ListHouseScreen from "./main-screen/ListHouseScreen";
+import HouseDetailScreen from "./main-screen/HouseDetailScreen";
+import MainHouseScreen from "./main-screen/MainHouseScreen";
 
-import { MonoText } from '../components/StyledText';
+function MainScreen({ navigation }) {
+  return (
+      <View style={{ flex: 1}}>
+        <Button
+            title="Go to Profile"
+            onPress={() => navigation.navigate(RouterPath.FILTER_SCREEN)}
+        />
+      </View>
+  );
+}
+
+const Stack = createStackNavigator();
+
+function MainScreenStack() {
+  return (
+      <Stack.Navigator>
+        <Stack.Screen name={RouterPath.MAIN_SCREEN} component={MainHouseScreen} options={{ title: '', headerStyle: styles.displayNone }}/>
+        <Stack.Screen name={RouterPath.FILTER_SCREEN} component={FilterHouseScreen} options={{ title: 'My home' }}/>
+        <Stack.Screen name={RouterPath.LIST_HOUSE_SCREEN} component={ListHouseScreen} options={{ title: 'My home' }}/>
+        <Stack.Screen name={RouterPath.HOUSE_DETAIL_SCREEN} component={HouseDetailScreen} options={{ title: 'My home' }}/>
+      </Stack.Navigator>
+  );
+}
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
-            }
-            style={styles.welcomeImage}
-          />
-        </View>
-
-        <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
-
-          <Text style={styles.getStartedText}>Open up the code for this screen:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText>screens/HomeScreen.js</MonoText>
-          </View>
-
-          <Text style={styles.getStartedText}>
-            Change any of the text, save the file, and your app will automatically reload.
-          </Text>
-        </View>
-
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-        <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
-        </View>
-      </View>
+      <MainScreenStack></MainScreenStack>
     </View>
   );
 }
 
-HomeScreen.navigationOptions = {
-  header: null,
-};
+// HomeScreen.navigationOptions = {
+//   header: null,
+// };
 
 function DevelopmentModeNotice() {
   if (__DEV__) {

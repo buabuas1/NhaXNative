@@ -7,8 +7,7 @@ import LinksScreen from '../screens/LinksScreen';
 import MessageScreen from '../screens/MessageScreen';
 import UserAccountScreen from '../screens/UserAccountScreen';
 import PromotionScreen from '../screens/PromotionScreen';
-import HouseScreen from '../screens/main-screen/HouseScreen';
-import TestComponent from "../screens/main-screen/TestComponent";
+import MainHouseScreen from '../screens/main-screen/MainHouseScreen';
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -23,7 +22,7 @@ export default function BottomTabNavigator({navigation, route}) {
         <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
             <BottomTab.Screen
                 name="House"
-                component={HouseScreen}
+                component={HomeScreen}
                 options={{
                     title: 'Tìm phòng',
                     tabBarIcon: ({focused}) => <TabBarIcon focused={focused} name="ios-home"/>,
@@ -59,7 +58,7 @@ export default function BottomTabNavigator({navigation, route}) {
 
 function getHeaderTitle(route) {
     const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
-
+    console.log(route);
     switch (routeName) {
         case 'Home':
             return 'Nhà X';
