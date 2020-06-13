@@ -1,13 +1,15 @@
 import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
-import { StyleSheet, Text, View, Button, Image} from 'react-native';
+import {StyleSheet, Text, View, Button, Image, ImageBackground, TouchableOpacity, Dimensions} from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import {createStackNavigator} from "@react-navigation/stack";
 import FilterHouseScreen from "./FilterScreen";
 import ListHouseScreen from "./ListHouseScreen";
 import HouseDetailScreen from "./HouseDetailScreen";
 import {RouterPath} from "../../constants/Router";
-import ItemService from "../../services/district.service";
+import DistrictService from "../../services/district.service";
+import {FlatList} from "react-native-web";
+import RoomService from "../../services/room.service";
 
 function MainScreen({ navigation }) {
     return (
@@ -36,79 +38,171 @@ function MainScreenStack() {
 export default class HouseScreen extends React.Component {
     constructor() {
         super();
-        this.itemService = new ItemService();
+        this.state = {
+            districts: [{"_id":"5edbc393633a4d52a5fc58d9","Name":"Đống Đa","RoomNumber":10,"HouseNumber":5,"ImageId":"5ee3ac351577dd2b3f853215"},{"_id":"5edbc393633a4d52a5fc58dc","Name":"Thanh Xuân","RoomNumber":10,"HouseNumber":5},{"_id":"5edbc393633a4d52a5fc58db","Name":"Hà Đông","RoomNumber":10,"HouseNumber":5},{"_id":"5edbc393633a4d52a5fc58da","Name":"Cầu Giấy","RoomNumber":10,"HouseNumber":5},{"_id":"5edbc393633a4d52a5fc58da","Name":"Cầu Giấy","RoomNumber":10,"HouseNumber":5},{"_id":"5edbc393633a4d52a5fc58da","Name":"Cầu Giấy","RoomNumber":10,"HouseNumber":5}],
+            rooms: [{"_id":"5edbc393633a4d52a5fc58d9","Name":"Đống Đa","RoomNumber":10,"HouseNumber":5,"ImageId":"5ee3ac351577dd2b3f853215"},{"_id":"5edbc393633a4d52a5fc58dc","Name":"Thanh Xuân","RoomNumber":10,"HouseNumber":5},{"_id":"5edbc393633a4d52a5fc58db","Name":"Hà Đông","RoomNumber":10,"HouseNumber":5},{"_id":"5edbc393633a4d52a5fc58da","Name":"Cầu Giấy","RoomNumber":10,"HouseNumber":5},{"_id":"5edbc393633a4d52a5fc58da","Name":"Cầu Giấy","RoomNumber":10,"HouseNumber":5},{"_id":"5edbc393633a4d52a5fc58da","Name":"Cầu Giấy","RoomNumber":10,"HouseNumber":5}],
+            houses: [],
+        };
+        this.districtService = new DistrictService();
+        this.roomService = new RoomService();
     }
     callApi = () => {
-        this.itemService.getItem().then(() => {
-            console.log('Called');
+        this.districtService.getList().then((res) => {
+            this.setState({districts: res})
+        });
+        this.roomService.getList().then((res) => {
+            this.setState({rooms: res})
         })
     }
-    componentDidMount(): void {
-        this.itemService.getItem().then(() => {
-            console.log('Called');
-        })
+    componentDidMount = (): void => {
+        // this.districtService.getList().then((res) => {
+        //     this.setState({districts: res})
+        // })
+        // this.callApi();
     }
 
-    state = {
-        nameList: []
-    }
     render() {
         return (
-            <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-                <Text>Danh sách phòng theo Quận</Text>
-                <Image
-                    style={styles.tinyLogo}
-                    source={{
-                        uri: 'https://live.staticflickr.com/65535/49976871436_e40ef1e04f_o.jpg',
-                    }}
-                />
+            <ScrollView>
                 <View style={styles.container}>
-                    <Text></Text>
-                    <Text>333333333333333333</Text>
-                    <Text>333333333333333333</Text>
+                    <Text style={styles.districtTitle}>Danh sách các quận</Text>
+                    <FlatList
+                        data={this.state.districts}
+                        keyExtractor={this._keyExtractor}     //has to be unique
+                        renderItem={({item}) => this.renderDistrict(item)} //method to render the data in the way you want using styling u need
+                        horizontal={false}
+                        numColumns={3}
+                    />
+                    <Text style={styles.roomTitle}>Danh sách các phòng Hot</Text>
+                    <FlatList
+                        data={this.state.rooms}
+                        keyExtractor={this._keyExtractor}     //has to be unique
+                        renderItem={({item}) => this.renderRoom(item)} //method to render the data in the way you want using styling u need
+                        horizontal={false}
+                        numColumns={3}
+                    />
                 </View>
-                <Button title={'Call api'} onPress={this.callApi}/>
-                <MainScreenStack/>
             </ScrollView>
-        );
+        )
+    }
+
+    renderDistrict = (item) => {
+        return (
+            <TouchableOpacity
+                key={item._id}
+                style={styles.item}
+                onPress={() => {}}
+            >
+                <ImageBackground
+                    style={styles.itemIcon}
+                    source={{
+                        uri: 'https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg',
+                    }}
+                >
+                    <Text style={styles.itemTitle}>
+                        {item.Name}
+                    </Text>
+                </ImageBackground>
+
+            </TouchableOpacity>
+        )
+    }
+
+    renderRoom = (item) => {
+        return (
+            <TouchableOpacity
+                key={item._id}
+                style={styles.room}
+                onPress={() => {}}
+            >
+                <ImageBackground
+                    // imageStyle={roomIcon}
+                    style={styles.roomText}
+                    imageStyle={styles.roomIcon}
+                    source={{
+                        uri: 'https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg',
+                    }}
+                >
+                    <Text style={styles.itemTitle}>
+                        {item.Name}
+                    </Text>
+                </ImageBackground>
+                <View>
+                    <Text style={styles.descriptionRoom}>{item.Name}</Text>
+                </View>
+            </TouchableOpacity>
+        )
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fafafa',
         flexDirection: 'row',
-        padding: 16
+        flexWrap: 'wrap',
     },
-    contentContainer: {
-        paddingTop: 15,
+    item: {
+        width: (Dimensions.get('window').width - 20) * 1/3,
+        height: (Dimensions.get('window').width - 20) * 1/3,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexGrow: 3,
+        padding: 2,
+        margin: 3,
+        borderWidth: 1,
+        borderColor: "black",
+        borderRadius: 10,
     },
-    optionIconContainer: {
-        marginRight: 12,
+    itemIcon: {
+        width: '100%',
+        height: '100%',
+        borderWidth: 1,
+        borderColor: "black",
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    option: {
-        backgroundColor: '#fdfdfd',
-        paddingHorizontal: 15,
-        paddingVertical: 15,
-        borderWidth: StyleSheet.hairlineWidth,
-        borderBottomWidth: 0,
-        borderColor: '#ededed',
+    itemTitle: {
+        marginTop: '70%',
+        color: "white",
+        fontSize: 18,
+        fontWeight: "bold",
+        textAlign: 'center',
     },
-    lastOption: {
-        borderBottomWidth: StyleSheet.hairlineWidth,
+    districtTitle: {
+        color: "#352ef5",
+        fontSize: 18,
+        fontWeight: "bold",
     },
-    optionText: {
-        fontSize: 15,
-        alignSelf: 'flex-start',
-        marginTop: 1,
+    roomTitle: {
+        color: "#352ef5",
+        fontSize: 18,
+        fontWeight: "bold",
+        marginTop: 30
     },
-    displayNone: {
-        height: 0,
-        opacity: 0
+    room: {
+        width: (Dimensions.get('window').width - 10) * 0.5,
+        height: (Dimensions.get('window').width + 150) * 0.5,
+        flexGrow: 2,
+        // padding: 2,
+        margin: 3,
+        borderWidth: 1,
+        borderColor: "black",
+        borderRadius: '10px',
     },
-    tinyLogo: {
-        width: 150,
-        height: 150,
+    roomIcon: {
+        width: (Dimensions.get('window').width - 10) * 0.5,
+        height: (Dimensions.get('window').width - 10) * 0.5,
+        borderWidth: 1,
+        borderColor: "black",
+        borderRadius: '10px',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
+    roomText: {
+        // textAlign: 'center'
+    },
+    descriptionRoom: {
+        marginTop: '20%'
+        // fontSize: ;
+    }
 });

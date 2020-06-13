@@ -2,7 +2,7 @@ import Config from "react-native-config";
 import axios from "axios";
 import getEnvVars from "../config/index";
 
-class DistrictService {
+class RoomService {
     constructor() {
         this.config = getEnvVars;
         axios.defaults.headers = {
@@ -12,7 +12,7 @@ class DistrictService {
     }
 
     async getList(itemLink) {
-        return axios.get(this.config.apiUrl + '/api/district')
+        return axios.get(this.config.apiUrl + '/api/room')
             .then(response => {
                 if (!response.statusText === 'OK') {
                     this.handleResponseError(response);
@@ -33,4 +33,4 @@ class DistrictService {
     }
 }
 
-export default DistrictService;
+export default RoomService;

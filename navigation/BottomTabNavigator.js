@@ -8,6 +8,7 @@ import MessageScreen from '../screens/MessageScreen';
 import UserAccountScreen from '../screens/UserAccountScreen';
 import PromotionScreen from '../screens/PromotionScreen';
 import HouseScreen from '../screens/main-screen/HouseScreen';
+import TestComponent from "../screens/main-screen/TestComponent";
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -61,7 +62,7 @@ function getHeaderTitle(route) {
 
     switch (routeName) {
         case 'Home':
-            return 'How to get started';
+            return 'Nhà X';
         case 'Links':
             return 'Links to learn more';
         case 'Nhắn tin':
