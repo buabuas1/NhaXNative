@@ -49,8 +49,8 @@ export default class ListHouseScreen extends React.Component {
         const {navigation} = this.props;
         return (
             <ScrollView>
+                <Text style={styles.districtName}>{district.Name}</Text>
                 <View style={styles.container}>
-                    <Text style={styles.districtName}>{district.Name}</Text>
                     <FlatList
                         data={this.state.rooms}
                         keyExtractor={(item) => item._id}     //has to be unique

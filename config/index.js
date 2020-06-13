@@ -14,7 +14,7 @@ const ENV = {
 };
 
 function getEnvVars(env = "") {
-    if (window.location.href.indexOf('localhost') !== -1) {
+    if (window && window.location && window.location.href.indexOf('localhost') !== -1) {
         return ENV.dev;
     } else {
         return ENV.prod;

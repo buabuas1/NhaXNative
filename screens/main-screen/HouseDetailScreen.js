@@ -5,27 +5,29 @@ import {
 } from "react-native";
 import React from "react";
 import { Modal } from 'react-native';
-// import ImageViewer from 'react-native-image-zoom-viewer';
-//
-// const images = [{
-//     // Simplest usage.
-//     url: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460',
-//
-//     // width: number
-//     // height: number
-//     // Optional, if you know the image size, you can set the optimization performance
-//
-//     // You can pass props to <Image />.
-//     props: {
-//         // headers: ...
-//     }
-// }]
+import ImageViewer from 'react-native-image-zoom-viewer';
+import TabBarIcon from "../../components/TabBarIcon";
+
+const images = [{
+    // Simplest usage.
+    url: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460',
+
+    // width: number
+    // height: number
+    // Optional, if you know the image size, you can set the optimization performance
+
+    // You can pass props to <Image />.
+    props: {
+        // headers: ...
+    }
+}]
 
 export default class HouseDetailScreen extends React.Component {
     constructor() {
         super();
         this.state = {
-            rooms: []
+            rooms: [],
+            isShowImageZoom: false
         }
     }
 
@@ -66,11 +68,14 @@ export default class HouseDetailScreen extends React.Component {
         console.log(this.props);
         const {house} = this.props.route.params;
         const {navigation} = this.props;
-        const images = [{url: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/sample_img.png',},];
+        const {isShowImageZoom} = this.state;
+        const images = [{url: 'https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg'},
+            {url: 'https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg'},
+            {url: 'https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg'}];
         return (
             <ScrollView>
+                <Text style={styles.houseName}>{house.Name}</Text>
                 <View style={styles.container}>
-                    <Text style={styles.houseName}>{house.Name}</Text>
                     <FlatList
                         data={this.state.rooms}
                         keyExtractor={(item) => item._id}     //has to be unique
@@ -78,19 +83,25 @@ export default class HouseDetailScreen extends React.Component {
                         horizontal={false}
                         numColumns={3}
                     />
-                    <Text style={styles.houseName}>{'house.Name'}</Text>
+
                 </View>
-                {/*<Modal visible={true} transparent={true}>*/}
-                {/*    <ImageViewer imageUrls={images}/>*/}
-                {/*</Modal>*/}
+                <Text style={styles.houseName}>{'house.Name'}</Text>
+                <View style={styles.MainContainer}>
+                    <Modal
+                        visible={isShowImageZoom}
+                        transparent={false}>
+                        <TouchableOpacity  onPress={this.closeImageZoom}>
+                            <View style={styles.closeIcon}><TabBarIcon  name={'ios-close-circle'}
+                                               focused={true}></TabBarIcon></View>
+                        </TouchableOpacity>
+
+
+                        <ImageViewer onCancel={() => {this.closeImageZoom()}}
+                                     enableSwipeDown={true} imageUrls={images} />
+                    </Modal>
+                </View>
             </ScrollView>
-            // <View style={styles.MainContainer}>
-            //     <Modal
-            //         visible={true}
-            //         transparent={false}>
-            //         <ImageViewer imageUrls={images} />
-            //     </Modal>
-            // </View>
+
         )
     }
 
@@ -99,6 +110,7 @@ export default class HouseDetailScreen extends React.Component {
             <TouchableOpacity
                 key={item._id}
                 style={styles.item}
+                onPress={this.showImageZoom}
             >
                 <ImageBackground
                     style={styles.itemIcon}
@@ -109,6 +121,18 @@ export default class HouseDetailScreen extends React.Component {
                 </ImageBackground>
             </TouchableOpacity>
         )
+    }
+
+    closeImageZoom = () => {
+        this.setState({
+            isShowImageZoom: false
+        })
+    }
+
+    showImageZoom = () => {
+        this.setState({
+            isShowImageZoom: true
+        })
     }
 }
 
@@ -148,4 +172,10 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100
     },
+    closeIcon: {
+        // alignItems: 'right'
+        width: '100%',
+        flexDirection: 'row-reverse',
+        // alignItems: 'flex-end'
+    }
 });

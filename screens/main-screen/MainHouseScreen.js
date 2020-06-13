@@ -69,6 +69,7 @@ export default class MainHouseScreen extends React.Component {
             >
                 <ImageBackground
                     style={styles.itemIcon}
+                    imageStyle={styles.itemIcon}
                     source={{
                         uri: 'https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg',
                     }}
@@ -145,6 +146,10 @@ const styles = StyleSheet.create({
         color: "#352ef5",
         fontSize: 18,
         fontWeight: "bold",
+        // flex: 1,
+        // flexDirection: 'row',
+        height: 30,
+        marginTop: 10
     },
     roomTitle: {
         color: "#352ef5",
@@ -160,7 +165,7 @@ const styles = StyleSheet.create({
         margin: 3,
         borderWidth: 1,
         borderColor: "black",
-        borderRadius: '10px',
+        borderRadius: 10,
     },
     roomIcon: {
         width: (Dimensions.get('window').width - 10) * 0.5,
