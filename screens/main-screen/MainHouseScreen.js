@@ -11,8 +11,80 @@ export default class MainHouseScreen extends React.Component {
     constructor() {
         super();
         this.state = {
-            districts: [{"_id":"5edbc393633a4d52a5fc58d9","Name":"Đống Đa","RoomNumber":10,"HouseNumber":5,"ImageId":"5ee3ac351577dd2b3f853215"},{"_id":"5edbc393633a4d52a5fc58dc","Name":"Thanh Xuân","RoomNumber":10,"HouseNumber":5},{"_id":"5edbc393633a4d52a5fc58db","Name":"Hà Đông","RoomNumber":10,"HouseNumber":5},{"_id":"5edbc393633a4d52a5fc58da","Name":"Cầu Giấy","RoomNumber":10,"HouseNumber":5},{"_id":"5edbc393633a4d52a5fc58da","Name":"Cầu Giấy","RoomNumber":10,"HouseNumber":5},{"_id":"5edbc393633a4d52a5fc58da","Name":"Cầu Giấy","RoomNumber":10,"HouseNumber":5}],
-            rooms: [{"_id":"5edbc393633a4d52a5fc58d9","Name":"Đống Đa","RoomNumber":10,"HouseNumber":5,"ImageId":"5ee3ac351577dd2b3f853215"},{"_id":"5edbc393633a4d52a5fc58dc","Name":"Thanh Xuân","RoomNumber":10,"HouseNumber":5},{"_id":"5edbc393633a4d52a5fc58db","Name":"Hà Đông","RoomNumber":10,"HouseNumber":5},{"_id":"5edbc393633a4d52a5fc58da","Name":"Cầu Giấy","RoomNumber":10,"HouseNumber":5},{"_id":"5edbc393633a4d52a5fc58da","Name":"Cầu Giấy","RoomNumber":10,"HouseNumber":5},{"_id":"5edbc393633a4d52a5fc58da","Name":"Cầu Giấy","RoomNumber":10,"HouseNumber":5}],
+            districts: [
+                {
+                    "_id": "5edbc393633a4d52a5fc58d9",
+                    "Name": "Đống Đa",
+                    "RoomNumber": 10,
+                    "HouseNumber": 5,
+                    "ImageId": "5ee5acb48b3cb4961fe674c4",
+                    "ImageUrl": "https://live.staticflickr.com/65535/49998629201_6c136b10ac_o.jpg"
+                },
+                {
+                    "_id": "5edbc393633a4d52a5fc58dc",
+                    "Name": "Thanh Xuân",
+                    "RoomNumber": 10,
+                    "HouseNumber": 5,
+                    "ImageId": "5ee5acb48b3cb4961fe674c5",
+                    "ImageUrl": "https://live.staticflickr.com/65535/49998629116_a7634e0f43_o.jpg"
+                },
+                {
+                    "_id": "5edbc393633a4d52a5fc58db",
+                    "Name": "Hà Đông",
+                    "RoomNumber": 10,
+                    "HouseNumber": 5,
+                    "ImageId": "5ee5acb48b3cb4961fe674c6",
+                    "ImageUrl": "https://live.staticflickr.com/65535/50004149582_6b91179faa_o.jpg"
+                },
+                {
+                    "_id": "5edbc393633a4d52a5fc58da",
+                    "Name": "Cầu Giấy",
+                    "RoomNumber": 10,
+                    "HouseNumber": 5,
+                    "ImageId": "5ee5acb48b3cb4961fe674c3",
+                    "ImageUrl": "https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg"
+                },
+                {
+                    "_id": "5ee5995c8b3cb4961fe674c1",
+                    "Name": "Bắc Từ Liêm",
+                    "RoomNumber": 10,
+                    "HouseNumber": 5,
+                    "ImageId": "5ee5acb48b3cb4961fe674c7",
+                    "ImageUrl": "https://live.staticflickr.com/65535/50003369828_50ccdd51f3_o.jpg"
+                },
+                {
+                    "_id": "5ee5995c8b3cb4961fe674c2",
+                    "Name": "Nam Từ Liêm",
+                    "RoomNumber": 10,
+                    "HouseNumber": 5,
+                    "ImageId": "5ee5acb48b3cb4961fe674c8",
+                    "ImageUrl": "https://live.staticflickr.com/65535/50003368138_43ffb99b64_o.jpg"
+                }
+            ],
+            rooms: [
+                {
+                    "_id": "5edbc4a5633a4d52a5fc58dd",
+                    "DistrictId": "5edbc393633a4d52a5fc58d9",
+                    "Name": "Nhà số 17 ngõ 38 Ngô Sỹ Liên",
+                    "RoomNumber": 11,
+                    "Address": "Nhà số 17 ngõ 38 Ngô Sỹ Liên, Văn Miếu, Đống Đa",
+                    "PriceFrom": 2000000,
+                    "PriceTo": 3800000,
+                    "AvatarId": "5ee5b8678b3cb4961fe674c9",
+                    "AvatarUrl": "https://live.staticflickr.com/65535/49976872231_274943d9d1_o.jpg"
+                },
+                {
+                    "_id": "5edbc4a5633a4d52a5fc58dd1",
+                    "DistrictId": "5edbc393633a4d52a5fc58d9",
+                    "Name": "Nhà số 17 ngõ 38 Ngô Sỹ Liên",
+                    "RoomNumber": 11,
+                    "Address": "Nhà số 17 ngõ 38 Ngô Sỹ Liên, Văn Miếu, Đống Đa",
+                    "PriceFrom": 2000000,
+                    "PriceTo": 3800000,
+                    "AvatarId": "5ee5b8678b3cb4961fe674c9",
+                    "AvatarUrl": "https://live.staticflickr.com/65535/49976872231_274943d9d1_o.jpg"
+                }
+            ],
             houses: [],
         };
         this.districtService = new DistrictService();
@@ -71,7 +143,7 @@ export default class MainHouseScreen extends React.Component {
                     style={styles.itemIcon}
                     imageStyle={styles.itemIcon}
                     source={{
-                        uri: 'https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg',
+                        uri: item.ImageUrl,
                     }}
                 >
                     <Text style={styles.itemTitle}>
@@ -97,7 +169,7 @@ export default class MainHouseScreen extends React.Component {
                     style={styles.roomText}
                     imageStyle={styles.roomIcon}
                     source={{
-                        uri: 'https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg',
+                        uri: item.AvatarUrl,
                     }}
                 >
                 </ImageBackground>
@@ -122,15 +194,15 @@ const styles = StyleSheet.create({
         flexGrow: 3,
         padding: 2,
         margin: 3,
-        borderWidth: 1,
-        borderColor: "black",
-        borderRadius: 10,
+        // borderWidth: 1,
+        // borderColor: "black",
+        // borderRadius: 10,
     },
     itemIcon: {
         width: '100%',
         height: '100%',
         borderWidth: 1,
-        borderColor: "black",
+        borderColor: "white",
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
@@ -138,7 +210,7 @@ const styles = StyleSheet.create({
     itemTitle: {
         marginTop: '70%',
         color: "white",
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: "bold",
         textAlign: 'center',
     },
@@ -163,9 +235,9 @@ const styles = StyleSheet.create({
         flexGrow: 2,
         // padding: 2,
         margin: 3,
-        borderWidth: 1,
-        borderColor: "black",
-        borderRadius: 10,
+        // borderWidth: 1,
+        // borderColor: "black",
+        // borderRadius: 10,
     },
     roomIcon: {
         width: (Dimensions.get('window').width - 10) * 0.5,
@@ -180,7 +252,7 @@ const styles = StyleSheet.create({
         // textAlign: 'center'
     },
     descriptionRoom: {
-        marginTop: '20%'
+        marginTop: '70%'
         // fontSize: ;
     }
 });

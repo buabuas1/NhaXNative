@@ -7,6 +7,7 @@ import FilterHouseScreen from "./main-screen/FilterScreen";
 import ListHouseScreen from "./main-screen/ListHouseScreen";
 import HouseDetailScreen from "./main-screen/HouseDetailScreen";
 import MainHouseScreen from "./main-screen/MainHouseScreen";
+import RoomDetailScreen from "./main-screen/RoomDetailScreen";
 
 function MainScreen({navigation}) {
     return (
@@ -31,6 +32,8 @@ function MainScreenStack() {
             <Stack.Screen name={RouterPath.LIST_HOUSE_SCREEN} component={ListHouseScreen}
                           options={{title: 'My home', headerStyle: styles.displayNone}}/>
             <Stack.Screen name={RouterPath.HOUSE_DETAIL_SCREEN} component={HouseDetailScreen}
+                          options={{title: 'My home', headerStyle: styles.displayNone}}/>
+            <Stack.Screen name={RouterPath.ROOM_DETAIL_SCREEN} component={RoomDetailScreen}
                           options={{title: 'My home', headerStyle: styles.displayNone}}/>
         </Stack.Navigator>
     );

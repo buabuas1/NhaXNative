@@ -4,13 +4,14 @@ import {
     ImageBackground
 } from "react-native";
 import React from "react";
-import { Modal } from 'react-native';
+import {Modal} from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import TabBarIcon from "../../components/TabBarIcon";
+import {RouterPath} from "../../constants/Router";
 
 const images = [{
     // Simplest usage.
-    url: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460',
+    url: '"https://live.staticflickr.com/65535/49977139892_9640f4c127_k.jpg"',
 
     // width: number
     // height: number
@@ -20,108 +21,206 @@ const images = [{
     props: {
         // headers: ...
     }
-}]
+},
+    {
+        url: 'https://live.staticflickr.com/65535/49977140202_3e6bfbe948_k.jpg',
+    },
+    {
+        url: 'https://live.staticflickr.com/65535/49977140097_55ab88a0c7_k.jpg',
+    },
+    {
+        url: 'https://live.staticflickr.com/65535/49977139412_04ac207104_k.jpg',
+    },
+    {
+        url: 'https://live.staticflickr.com/65535/49977137872_c3f524e2cb_k.jpg',
+    }
+]
 
 export default class HouseDetailScreen extends React.Component {
     constructor() {
         super();
         this.state = {
-            rooms: [],
+            rooms: [
+                {
+                    "Facilities": [
+                        "5edbc90f633a4d52a5fc58eb",
+                        "5edbc90f633a4d52a5fc58ec"
+                    ],
+                    "Images": [
+                        "5edbce16633a4d52a5fc5904",
+                        "5edbce16633a4d52a5fc5903",
+                        "5edbce16633a4d52a5fc5905"
+                    ],
+                    "_id": "5edbce9d633a4d52a5fc5907",
+                    "HouseId": "5edbc4a5633a4d52a5fc58dd",
+                    "Name": "Phòng nhỏ",
+                    "Square": 20,
+                    "AvatarId": "5edbce16633a4d52a5fc5903",
+                    "PriceFrom": 1800000,
+                    "PriceTo": 2000000,
+                    "ImageUrls": [
+                        {
+                            "_id": "5edbce16633a4d52a5fc5903",
+                            "Url": "https://live.staticflickr.com/65535/49977135083_8150d5899d_o.jpg"
+                        },
+                        {
+                            "_id": "5edbce16633a4d52a5fc5904",
+                            "Url": "https://live.staticflickr.com/65535/49977135898_8f22f4d123_o.jpg"
+                        },
+                        {
+                            "_id": "5edbce16633a4d52a5fc5905",
+                            "Url": "https://live.staticflickr.com/65535/49977915317_eb40db6b20_o.jpg"
+                        }
+                    ],
+                    "AvatarUrl": "https://live.staticflickr.com/65535/49977135083_8150d5899d_o.jpg"
+                },
+                {
+                    "Facilities": [
+                        "5edbc90f633a4d52a5fc58e7",
+                        "5edbc90f633a4d52a5fc58e8",
+                        "5edbc90f633a4d52a5fc58e9",
+                        "5edbc90f633a4d52a5fc58eb",
+                        "5edbc90f633a4d52a5fc58ea",
+                        "5edbc90f633a4d52a5fc58ec"
+                    ],
+                    "Images": [
+                        "5edbcd7e633a4d52a5fc58fe",
+                        "5edbcd7e633a4d52a5fc58ff",
+                        "5edbcd7e633a4d52a5fc5900",
+                        "5edbcd7e633a4d52a5fc5901",
+                        "5edbcd7e633a4d52a5fc5902"
+                    ],
+                    "_id": "5edbce9d633a4d52a5fc5906",
+                    "HouseId": "5edbc4a5633a4d52a5fc58dd",
+                    "Name": "Phòng full đồ",
+                    "Square": 20,
+                    "AvatarId": "5ee5b8678b3cb4961fe674c9",
+                    "PriceFrom": 3500000,
+                    "PriceTo": 3800000,
+                    "ImageUrls": [
+                        {
+                            "_id": "5edbcd7e633a4d52a5fc58fe",
+                            "Url": "https://live.staticflickr.com/65535/49977139892_9640f4c127_k.jpg"
+                        },
+                        {
+                            "_id": "5edbcd7e633a4d52a5fc58ff",
+                            "Url": "https://live.staticflickr.com/65535/49977140202_3e6bfbe948_k.jpg"
+                        },
+                        {
+                            "_id": "5edbcd7e633a4d52a5fc5900",
+                            "Url": "https://live.staticflickr.com/65535/49977140097_55ab88a0c7_k.jpg"
+                        },
+                        {
+                            "_id": "5edbcd7e633a4d52a5fc5901",
+                            "Url": "https://live.staticflickr.com/65535/49977139412_04ac207104_k.jpg"
+                        },
+                        {
+                            "_id": "5edbcd7e633a4d52a5fc5902",
+                            "Url": "https://live.staticflickr.com/65535/49977137872_c3f524e2cb_k.jpg"
+                        }
+                    ],
+                    "AvatarUrl": "https://live.staticflickr.com/65535/49976872231_274943d9d1_o.jpg"
+                }
+            ],
             isShowImageZoom: false
         }
     }
 
     componentDidMount = (): void => {
-        this.setState({
-            ...this.state,
-            rooms: [{
-                "_id": "5edbc393633a4d52a5fc58d9",
-                "Name": "Đống Đa",
-                "RoomNumber": 10,
-                "HouseNumber": 5,
-                "ImageId": "5ee3ac351577dd2b3f853215"
-            }, {
-                "_id": "5edbc393633a4d52a5fc58dc",
-                "Name": "Thanh Xuân",
-                "RoomNumber": 10,
-                "HouseNumber": 5
-            }, {
-                "_id": "5edbc393633a4d52a5fc58db",
-                "Name": "Hà Đông",
-                "RoomNumber": 10,
-                "HouseNumber": 5
-            }, {
-                "_id": "5edbc393633a4d52a5fc58da",
-                "Name": "Cầu Giấy",
-                "RoomNumber": 10,
-                "HouseNumber": 5
-            }, {
-                "_id": "5edbc393633a4d52a5fc58da",
-                "Name": "Cầu Giấy",
-                "RoomNumber": 10,
-                "HouseNumber": 5
-            }, {"_id": "5edbc393633a4d52a5fc58da", "Name": "Cầu Giấy", "RoomNumber": 10, "HouseNumber": 5}]
-        })
+        // this.setState({
+        //     ...this.state,
+        //     rooms: [{
+        //         "_id": "5edbc393633a4d52a5fc58d9",
+        //         "Name": "Đống Đa",
+        //         "RoomNumber": 10,
+        //         "HouseNumber": 5,
+        //         "ImageId": "5ee3ac351577dd2b3f853215"
+        //     }, {
+        //         "_id": "5edbc393633a4d52a5fc58dc",
+        //         "Name": "Thanh Xuân",
+        //         "RoomNumber": 10,
+        //         "HouseNumber": 5
+        //     }, {
+        //         "_id": "5edbc393633a4d52a5fc58db",
+        //         "Name": "Hà Đông",
+        //         "RoomNumber": 10,
+        //         "HouseNumber": 5
+        //     }, {
+        //         "_id": "5edbc393633a4d52a5fc58da",
+        //         "Name": "Cầu Giấy",
+        //         "RoomNumber": 10,
+        //         "HouseNumber": 5
+        //     }, {
+        //         "_id": "5edbc393633a4d52a5fc58da",
+        //         "Name": "Cầu Giấy",
+        //         "RoomNumber": 10,
+        //         "HouseNumber": 5
+        //     }, {"_id": "5edbc393633a4d52a5fc58da", "Name": "Cầu Giấy", "RoomNumber": 10, "HouseNumber": 5}]
+        // })
     }
 
     render(): React.ReactNode {
         console.log(this.props);
         const {house} = this.props.route.params;
         const {navigation} = this.props;
-        const {isShowImageZoom} = this.state;
-        const images = [{url: 'https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg'},
-            {url: 'https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg'},
-            {url: 'https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg'}];
+        const {isShowImageZoom, rooms} = this.state;
+        const images = [{
+            url: 'https://live.staticflickr.com/65535/49976872231_274943d9d1_o.jpg',
+        },{
+            url: 'https://live.staticflickr.com/65535/49977140202_3e6bfbe948_k.jpg',
+        },
+            {
+                url: 'https://live.staticflickr.com/65535/49977140097_55ab88a0c7_k.jpg',
+            },
+            {
+                url: 'https://live.staticflickr.com/65535/49977139412_04ac207104_k.jpg',
+            },
+            {
+                url: 'https://live.staticflickr.com/65535/49977137872_c3f524e2cb_k.jpg',
+            }];
         return (
             <ScrollView>
-                <Text style={styles.houseName}>{house.Name}</Text>
+                <Text style={styles.districtName}>{house.Name}</Text>
                 <View style={styles.container}>
                     <FlatList
-                        data={this.state.rooms}
+                        data={rooms}
                         keyExtractor={(item) => item._id}     //has to be unique
-                        renderItem={({item}) => this.renderRoom(item)} //method to render the data in the way you want using styling u need
+                        renderItem={({item}) => this.renderRoom(item, house)} //method to render the data in the way you want using styling u need
                         horizontal={false}
-                        numColumns={3}
+                        numColumns={1}
                     />
-
-                </View>
-                <Text style={styles.houseName}>{'house.Name'}</Text>
-                <View style={styles.MainContainer}>
-                    <Modal
-                        visible={isShowImageZoom}
-                        transparent={false}>
-                        <View style={styles.closeIC}>
-                            <TouchableOpacity  onPress={this.closeImageZoom}>
-                                <View style={styles.closeIcon}><TabBarIcon  name={'ios-close-circle'}
-                                                   focused={true}></TabBarIcon></View>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.fullScreen}>
-                            <ImageViewer onCancel={() => {this.closeImageZoom()}}
-                                         enableSwipeDown={true} imageUrls={images} />
-                        </View>
-                    </Modal>
                 </View>
             </ScrollView>
 
         )
     }
 
-    renderRoom = (item) => {
+    renderRoom = (item, house) => {
         return (
-            <TouchableOpacity
-                key={item._id}
-                style={styles.item}
-                onPress={this.showImageZoom}
-            >
-                <ImageBackground
-                    style={styles.itemIcon}
-                    source={{
-                        uri: 'https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg',
-                    }}
+            <View style={styles.container}>
+                <TouchableOpacity
+                    key={item._id}
+                    style={styles.container}
+                    onPress={() => {this.props.navigation.navigate(RouterPath.ROOM_DETAIL_SCREEN, {
+                        room: item,
+                        house: house
+                    })}}
                 >
-                </ImageBackground>
-            </TouchableOpacity>
+                    <ImageBackground
+                        imageStyle={styles.itemIcon}
+                        style={styles.left}
+                        source={{
+                            uri: item.AvatarUrl,
+                        }}
+                    >
+                    </ImageBackground>
+                    <View style={styles.right}>
+                        <Text style={styles.priceTitle}>{'Giá: '+ item.PriceFrom + ' - ' + item.PriceTo}</Text>
+                        <Text style={styles.nameTitle}>{item.Name}</Text>
+                        <Text style={styles.addressTitle}>{item.Address}</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
         )
     }
 
@@ -142,16 +241,25 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         flexWrap: 'wrap',
+        flex: 1,
+        marginTop: 5
     },
     item: {
-        width: (Dimensions.get('window').width) * 0.5,
-        height: (Dimensions.get('window').width) * 0.5 * 9 / 16,
-        flexGrow: 2,
-        margin: 1,
+        // width: (Dimensions.get('window').width - 10) * 0.5,
+        // height: (Dimensions.get('window').width + 150) * 0.5,
+        flex: 2,
+        flexDirection: 'column',
+        // flexGrow: 2,
+        // padding: 2,
+        margin: 3,
+        // borderWidth: 1,
+        // borderColor: "black",
+        // borderRadius: 10,
     },
     itemIcon: {
-        width: (Dimensions.get('window').width) * 0.5,
-        height: (Dimensions.get('window').width) * 0.5 * 9 / 16,
+        borderWidth: 1,
+        // borderColor: "black",
+        borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -163,35 +271,40 @@ const styles = StyleSheet.create({
     },
     descriptionRoom: {
     },
-    houseName: {
+    districtName: {
         color: "blue",
         fontSize: 18,
         fontWeight: "bold",
     },
-    MainContainer: {
-        flex: 1,
-        alignItems: 'center',
-        width: '100%',
-        height: '100%'
+    left: {
+        // backgroundColor: 'red',
+        width: (Dimensions.get('window').width - 10) * 1/3,
+        height: (Dimensions.get('window').width - 10) * 1/3,
+        borderWidth: 1,
+        borderColor: "black",
+        borderRadius: 10,
     },
-    closeIcon: {
-        // alignItems: 'right'
-        width: '100%',
-        flexDirection: 'row-reverse',
-        // alignItems: 'flex-end'
+    right: {
+        // backgroundColor: 'blue',
+        width: (Dimensions.get('window').width - 10) * 2/3,
+        height: (Dimensions.get('window').width - 10) * 1/3,
+        paddingLeft: 10,
+        borderBottomColor: 'gray',
+        borderBottomWidth: 1,
     },
-    closeIC: {
-        width: '100%',
-        position: 'absolute',
-        zIndex: 100,
-        flex: 1,
-        flexDirection: 'row-reverse',
-        marginRight: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0)'
+    priceTitle: {
+        color: 'green',
+        marginTop: 10
     },
-    fullScreen: {
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'blue'
+    nameTitle: {
+        color: 'black',
+        marginTop: 10,
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    addressTitle: {
+        color: 'gray',
+        marginTop: 10,
+        fontSize: 10
     }
 });

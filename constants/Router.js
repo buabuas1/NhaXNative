@@ -3,4 +3,5 @@ export const RouterPath = {
     FILTER_SCREEN: 'FilterHouseScreen',
     LIST_HOUSE_SCREEN: 'ListHouseScreen',
     HOUSE_DETAIL_SCREEN: 'HouseDetailScreen',
+    ROOM_DETAIL_SCREEN: 'RoomDetailScreen',
 }

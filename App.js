@@ -10,7 +10,13 @@ import {Provider} from 'react-redux';
 import store from './redux/store/index';
 
 const Stack = createStackNavigator();
+import { YellowBox } from 'react-native'
 
+
+
+YellowBox.ignoreWarnings([
+  'VirtualizedLists should never be nested', // TODO: Remove when fixed
+])
 export default function App(props) {
   const isLoadingComplete = useCachedResources();
 
