@@ -48,7 +48,7 @@ export default class ListHouseScreen extends React.Component {
         const {district} = this.props.route.params;
         const {navigation} = this.props;
         return (
-            <View>
+            <ScrollView>
                 <Text style={styles.districtName}>{district.Name}</Text>
                 <View style={styles.container}>
                     <FlatList
@@ -59,7 +59,7 @@ export default class ListHouseScreen extends React.Component {
                         numColumns={1}
                     />
                 </View>
-            </View>
+            </ScrollView>
         )
     }
 

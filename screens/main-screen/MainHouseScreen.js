@@ -35,7 +35,7 @@ export default class MainHouseScreen extends React.Component {
 
     render() {
         return (
-            <View>
+            <ScrollView>
                 <View style={styles.container}>
                     <Text style={styles.districtTitle}>{'Danh sách các quận'}</Text>
                     <FlatList
@@ -54,7 +54,7 @@ export default class MainHouseScreen extends React.Component {
                         numColumns={3}
                     />
                 </View>
-            </View>
+            </ScrollView>
         )
     }
 

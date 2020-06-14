@@ -73,7 +73,7 @@ export default class HouseDetailScreen extends React.Component {
             {url: 'https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg'},
             {url: 'https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg'}];
         return (
-            <View>
+            <ScrollView>
                 <Text style={styles.houseName}>{house.Name}</Text>
                 <View style={styles.container}>
                     <FlatList
@@ -102,7 +102,7 @@ export default class HouseDetailScreen extends React.Component {
                         </View>
                     </Modal>
                 </View>
-            </View>
+            </ScrollView>
 
         )
     }
