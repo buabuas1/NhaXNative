@@ -5,6 +5,7 @@ import {
 } from "react-native";
 import React from "react";
 import {RouterPath} from "../../constants/Router";
+import {makePriceString} from "../../constants/Helper";
 
 export default class ListHouseScreen extends React.Component {
     constructor() {
@@ -17,10 +18,16 @@ export default class ListHouseScreen extends React.Component {
                     "Name": "Nhà số 17 ngõ 38 Ngô Sỹ Liên",
                     "RoomNumber": 11,
                     "Address": "Nhà số 17 ngõ 38 Ngô Sỹ Liên, Văn Miếu, Đống Đa",
+                    "HostId": "5edd81588582ed2f9cf244d7",
                     "PriceFrom": 2000000,
                     "PriceTo": 3800000,
                     "AvatarId": "5ee5b8678b3cb4961fe674c9",
-                    "AvatarUrl": "https://live.staticflickr.com/65535/49976872231_274943d9d1_o.jpg"
+                    "AvatarUrl": "https://live.staticflickr.com/65535/49976872231_274943d9d1_o.jpg",
+                    "Host": {
+                        "_id": "5edd81588582ed2f9cf244d7",
+                        "Name": "A.Sơn",
+                        "Phone": "0969110464"
+                    }
                 },
                 {
                     "_id": "5edbc4a5633a4d52a5fc58dd1",
@@ -28,10 +35,16 @@ export default class ListHouseScreen extends React.Component {
                     "Name": "Nhà số 17 ngõ 38 Ngô Sỹ Liên",
                     "RoomNumber": 11,
                     "Address": "Nhà số 17 ngõ 38 Ngô Sỹ Liên, Văn Miếu, Đống Đa",
+                    "HostId": "5edd81588582ed2f9cf244d7",
                     "PriceFrom": 2000000,
                     "PriceTo": 3800000,
                     "AvatarId": "5ee5b8678b3cb4961fe674c9",
-                    "AvatarUrl": "https://live.staticflickr.com/65535/49976872231_274943d9d1_o.jpg"
+                    "AvatarUrl": "https://live.staticflickr.com/65535/49976872231_274943d9d1_o.jpg",
+                    "Host": {
+                        "_id": "5edd81588582ed2f9cf244d7",
+                        "Name": "A.Sơn",
+                        "Phone": "0969110464"
+                    }
                 }
             ]
         }
@@ -105,7 +118,7 @@ export default class ListHouseScreen extends React.Component {
                         >
                         </ImageBackground>
                         <View style={styles.right}>
-                            <Text style={styles.priceTitle}>{'Giá: '+ item.PriceFrom + ' - ' + item.PriceTo}</Text>
+                            <Text style={styles.priceTitle}>{'Giá: '+ makePriceString(item.PriceFrom, item.PriceTo)}</Text>
                             <Text style={styles.nameTitle}>{item.Name}</Text>
                             <Text style={styles.addressTitle}>{item.Address}</Text>
                         </View>

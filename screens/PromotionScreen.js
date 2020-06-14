@@ -1,12 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {ImageBackground, StyleSheet, Text, View} from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
 export default function PromotionScreen() {
     return (
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-            <Text>Coming Soon</Text>
+            <ImageBackground  source={require('../assets/images/comming-soon.png')}
+                              style={styles.comming}/>
         </ScrollView>
     );
 }
@@ -53,4 +54,8 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         marginTop: 1,
     },
+    comming: {
+        width: '100%',
+        height: 200
+    }
 });

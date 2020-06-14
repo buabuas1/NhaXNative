@@ -8,6 +8,7 @@ import {Modal} from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import TabBarIcon from "../../components/TabBarIcon";
 import {RouterPath} from "../../constants/Router";
+import {makePriceString} from "../../constants/Helper";
 
 const images = [{
     // Simplest usage.
@@ -215,7 +216,7 @@ export default class HouseDetailScreen extends React.Component {
                     >
                     </ImageBackground>
                     <View style={styles.right}>
-                        <Text style={styles.priceTitle}>{'Giá: '+ item.PriceFrom + ' - ' + item.PriceTo}</Text>
+                        <Text style={styles.priceTitle}>{'Giá: '+ makePriceString(item.PriceFrom, item.PriceTo)}</Text>
                         <Text style={styles.nameTitle}>{item.Name}</Text>
                         <Text style={styles.addressTitle}>{item.Address}</Text>
                     </View>
