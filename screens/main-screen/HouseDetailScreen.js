@@ -73,7 +73,7 @@ export default class HouseDetailScreen extends React.Component {
             {url: 'https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg'},
             {url: 'https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg'}];
         return (
-            <ScrollView>
+            <View>
                 <Text style={styles.houseName}>{house.Name}</Text>
                 <View style={styles.container}>
                     <FlatList
@@ -90,17 +90,19 @@ export default class HouseDetailScreen extends React.Component {
                     <Modal
                         visible={isShowImageZoom}
                         transparent={false}>
-                        <TouchableOpacity  onPress={this.closeImageZoom}>
-                            <View style={styles.closeIcon}><TabBarIcon  name={'ios-close-circle'}
-                                               focused={true}></TabBarIcon></View>
-                        </TouchableOpacity>
-
-
-                        <ImageViewer onCancel={() => {this.closeImageZoom()}}
-                                     enableSwipeDown={true} imageUrls={images} />
+                        <View style={styles.closeIC}>
+                            <TouchableOpacity  onPress={this.closeImageZoom}>
+                                <View style={styles.closeIcon}><TabBarIcon  name={'ios-close-circle'}
+                                                   focused={true}></TabBarIcon></View>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.fullScreen}>
+                            <ImageViewer onCancel={() => {this.closeImageZoom()}}
+                                         enableSwipeDown={true} imageUrls={images} />
+                        </View>
                     </Modal>
                 </View>
-            </ScrollView>
+            </View>
 
         )
     }
@@ -169,13 +171,27 @@ const styles = StyleSheet.create({
     MainContainer: {
         flex: 1,
         alignItems: 'center',
-        width: 100,
-        height: 100
+        width: '100%',
+        height: '100%'
     },
     closeIcon: {
         // alignItems: 'right'
         width: '100%',
         flexDirection: 'row-reverse',
         // alignItems: 'flex-end'
+    },
+    closeIC: {
+        width: '100%',
+        position: 'absolute',
+        zIndex: 100,
+        flex: 1,
+        flexDirection: 'row-reverse',
+        marginRight: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0)'
+    },
+    fullScreen: {
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'blue'
     }
 });

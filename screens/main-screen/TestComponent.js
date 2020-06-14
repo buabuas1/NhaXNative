@@ -1,42 +1,47 @@
-// //This is an example of Pinch to Zoom Image//
-// import React, { Component } from 'react';
-// //import react in our code.
-//
-// import { StyleSheet, View, Modal } from 'react-native';
-// //import all the components we are going to use.
-//
-// import ImageViewer from 'react-native-image-zoom-viewer';
-// import Text from "react-native-web/dist/exports/Text";
-// //import ImageViewer which will help to get zoom Image
-//
-// export default class ImageV extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             isModelVisible: true,
-//         };
-//     }
-//     ShowModalFunction(visible) {
-//         this.setState({ isModelVisible: false });
-//     }
-//     render() {
-//         const images = [{url: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/sample_img.png',},];
-//         return (
-//             <View style={styles.MainContainer}>
-//                 <Modal
-//                     visible={true}
-//                     transparent={true}
-//                     onRequestClose={() => this.ShowModalFunction()}>
-//                     <ImageViewer style={styles.MainContainer} imageUrls={images} />
-//                 </Modal>
-//             </View>
-//         );
-//     }
-// }
-//
-// const styles = StyleSheet.create({
-//     MainContainer: {
-//         flex: 1,
-//         alignItems: 'center',
-//     },
-// });
+
+import * as React from 'react'
+import {StyleSheet, Text, ScrollView, View} from 'react-native'
+
+export default class Fixed extends React.Component {
+    render() {
+        return (
+            <View style={styles.container}>
+                <View style={styles.tbar}>
+                    <Text style={styles.text}>{'Fixed top bar'}</Text>
+                </View>
+            </View>
+        );
+    }
+}
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
+    tbar: {
+        width: 375,
+        height: 100,
+        borderBottomWidth: 5,
+        borderColor: 'black',
+        backgroundColor: 'red'
+    },
+    main: {
+        flex: 1
+    },
+    item: {
+        height: 200,
+        width: 375,
+        marginTop: 10,
+        backgroundColor: 'green'
+    },
+    bbar: {
+        width: 375,
+        height: 100,
+        borderTopWidth: 5,
+        borderColor: 'black',
+        backgroundColor: 'red'
+    },
+    text: {
+        color: '#ffffff',
+        fontSize: 40
+    }
+});
