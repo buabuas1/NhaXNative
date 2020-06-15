@@ -5,6 +5,7 @@ import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import {RouterPath} from "../../constants/Router";
 import DistrictService from "../../services/district.service";
 import RoomService from "../../services/room.service";
+import {makePriceInVND, makePriceString} from "../../constants/Helper";
 const roomWidth = 6;
 const roomHeight = 4;
 export default class MainHouseScreen extends React.Component {
@@ -83,6 +84,28 @@ export default class MainHouseScreen extends React.Component {
                     "PriceTo": 3800000,
                     "AvatarId": "5ee5b8678b3cb4961fe674c9",
                     "AvatarUrl": "https://live.staticflickr.com/65535/49976872231_274943d9d1_o.jpg"
+                },
+                {
+                    "_id": "5edbc4a5633a4d52a5fc58dd12",
+                    "DistrictId": "5edbc393633a4d52a5fc58d9",
+                    "Name": "Nhà số 17 ngõ 38 Ngô Sỹ Liên",
+                    "RoomNumber": 11,
+                    "Address": "Nhà số 17 ngõ 38 Ngô Sỹ Liên, Văn Miếu, Đống Đa",
+                    "PriceFrom": 2000000,
+                    "PriceTo": 3800000,
+                    "AvatarId": "5ee5b8678b3cb4961fe674c9",
+                    "AvatarUrl": "https://live.staticflickr.com/65535/49976872231_274943d9d1_o.jpg"
+                },
+                {
+                    "_id": "22fffff",
+                    "DistrictId": "5edbc393633a4d52a5fc58d9",
+                    "Name": "Nhà số 17 ngõ 38 Ngô Sỹ Liên",
+                    "RoomNumber": 11,
+                    "Address": "Nhà số 17 ngõ 38 Ngô Sỹ Liên, Văn Miếu, Đống Đa",
+                    "PriceFrom": 2000000,
+                    "PriceTo": 3800000,
+                    "AvatarId": "5ee5b8678b3cb4961fe674c9",
+                    "AvatarUrl": "https://live.staticflickr.com/65535/49976872231_274943d9d1_o.jpg"
                 }
             ],
             houses: [],
@@ -118,12 +141,14 @@ export default class MainHouseScreen extends React.Component {
                         numColumns={3}
                     />
                     <Text style={styles.roomTitle}>{'Danh sách các phòng Hot'}</Text>
+                    <Image source={require('../../assets/images/hot-icon.gif')}
+                    style={{width: 40, height: 40}}/>
                     <FlatList
                         data={this.state.rooms}
                         keyExtractor={(item) => item._id}     //has to be unique
                         renderItem={({item}) => this.renderRoom(item)} //method to render the data in the way you want using styling u need
                         horizontal={false}
-                        numColumns={3}
+                        numColumns={2}
                     />
                 </View>
             </ScrollView>
@@ -173,8 +198,16 @@ export default class MainHouseScreen extends React.Component {
                     }}
                 >
                 </ImageBackground>
-                <View>
-                    <Text style={styles.descriptionRoom}>{item.Name}</Text>
+                <View style={{marginLeft: 10}}>
+                    <View>
+                        <Text style={styles.priceTitle}>{'Giá: ' + makePriceInVND(1500000)}</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.nameTitle}>{item.Name}</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.addressTitle}>{item.Address}</Text>
+                    </View>
                 </View>
             </TouchableOpacity>
         )
@@ -194,9 +227,6 @@ const styles = StyleSheet.create({
         flexGrow: 3,
         padding: 2,
         margin: 3,
-        // borderWidth: 1,
-        // borderColor: "black",
-        // borderRadius: 10,
     },
     itemIcon: {
         width: '100%',
@@ -215,29 +245,27 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     districtTitle: {
-        color: "#352ef5",
+        color: "#5D4037",
         fontSize: 18,
         fontWeight: "bold",
         // flex: 1,
         // flexDirection: 'row',
         height: 30,
-        marginTop: 10
+        margin: 10
     },
     roomTitle: {
-        color: "#352ef5",
+        color: "#5D4037",
         fontSize: 18,
         fontWeight: "bold",
-        marginTop: 30
+        margin: 10,
+        marginTop: 20
     },
     room: {
         width: (Dimensions.get('window').width - 10) * 0.5,
-        height: (Dimensions.get('window').width * 2) * 0.5 * roomHeight / roomWidth,
+        height: (Dimensions.get('window').width * 1.8) * 0.5 * roomHeight / roomWidth,
         flexGrow: 2,
         // padding: 2,
         margin: 3,
-        // borderWidth: 1,
-        // borderColor: "black",
-        // borderRadius: 10,
     },
     roomIcon: {
         width: (Dimensions.get('window').width - 10) * 0.5,
@@ -251,8 +279,20 @@ const styles = StyleSheet.create({
     roomText: {
         // textAlign: 'center'
     },
-    descriptionRoom: {
-        marginTop: '70%'
-        // fontSize: ;
+    priceTitle: {
+        marginTop: '70%',
+        color: '#F06292',
+        textAlign: 'right',
+        paddingBottom: 5
+    },
+    nameTitle: {
+        color: 'black',
+        fontSize: 14,
+        fontWeight: 'bold',
+        paddingBottom: 5
+    },
+    addressTitle: {
+        color: '#6D4C41',
+        fontSize: 12
     }
 });

@@ -106,22 +106,24 @@ export default class RoomDetailScreen extends React.Component {
         return (
             <View style={{'marginTop': 30}}>
                 <View style={styles.priceSquare}>
-                    <Text style={styles.priceTitle}>{'Giá: '+ makePriceString(room.PriceFrom, room.PriceTo)}</Text>
+                    <Text style={styles.priceTitle}>{'Giá: '+ makePriceString(room.PriceFrom)}</Text>
                     <Text style={styles.squareTitle}>{'Diện tích: '+ makeSquareString(room.Square)}</Text>
                 </View>
                 <View style={styles.priceSquare}>
                     <View style={styles.left}>
-                        <TabBarIcon name={'ios-water'} focused={true}/>
+                        <Text >{'Điện'}</Text>
+                        <TabBarIcon name={'ios-bulb'} focused={true} size={30}/>
                         <Text >{'4k'}</Text>
                     </View>
                     <View style={styles.right}>
-                        <TabBarIcon name={'ios-bulb'} focused={true}/>
+                        <Text >{'Nước'}</Text>
+                        <TabBarIcon name={'ios-water'} focused={true} size={30}/>
                         <Text >{'4k'}</Text>
                     </View>
                 </View>
 
-                <View style={{'marginTop': 30}}>
-                    <Text style={{fontSize: 20}}>{'Tiện ích'}</Text>
+                <View style={styles.facility}>
+                    <Text style={{fontSize: 20, 'marginBottom': 20}}>{'Tiện ích'}</Text>
                     <FlatList
                         data={room.ImageUrls}
                         keyExtractor={(item) => item._id}     //has to be unique
@@ -131,7 +133,7 @@ export default class RoomDetailScreen extends React.Component {
                     />
                 </View>
                 <View style={{'marginTop': 30}}>
-                    <Text style={{fontSize: 20}}>{'Địa chỉ'}</Text>
+                    <Text style={{fontSize: 20, 'marginBottom': 20}}>{'Địa chỉ'}</Text>
                     <EvilIcons name="location" size={24} color="black" />
                     <Text>{house.Address}</Text>
                     <TouchableOpacity onPress={() => this.makeCall(house.Host)}>
@@ -237,6 +239,7 @@ const styles = StyleSheet.create({
         height: (Dimensions.get('window').width) * 0.5 * 9 / 16,
         justifyContent: 'center',
         alignItems: 'center',
+        margin: 1
     },
     itemTitle: {
         marginTop: '70%',
@@ -247,11 +250,11 @@ const styles = StyleSheet.create({
     descriptionRoom: {},
     roomName: {
         fontSize: 30,
-        fontWeight: "bold",
+        color: '#6D4C41'
     },
     houseName: {
         fontSize: 20,
-        fontWeight: "bold",
+        color: '#5D4037'
     },
     MainContainer: {
         flex: 1,
@@ -282,20 +285,28 @@ const styles = StyleSheet.create({
     priceTitle: {
         width: '50%',
         textAlign: 'center',
-        // flex: 2
+        fontSize: 20,
+        color: '#F06292',
+        marginBottom: 10
     },
     squareTitle: {
         width: '50%',
         textAlign: 'center',
-        // flex: 2
+        fontSize: 20,
+        color: '#F06292'
     },
     priceSquare: {
         flexDirection: 'row',
-        flex: 2
+        flex: 2,
+        borderBottomColor: '#D7CCC8',
+        borderBottomWidth: 1,
+        marginBottom: 10,
+        borderRadius: 10
     },
     left: {
         width: (Dimensions.get('window').width - 10) * .5,
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 10
     },
     right: {
         width: (Dimensions.get('window').width - 10) * .5,
@@ -310,5 +321,13 @@ const styles = StyleSheet.create({
     },
     margin10: {
         margin: 10
+    },
+    facility: {
+        marginTop: 20,
+        borderBottomColor: '#D7CCC8',
+        borderBottomWidth: 1,
+        marginBottom: 10,
+        borderRadius: 10,
+        paddingBottom: 15
     }
 });
