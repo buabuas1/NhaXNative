@@ -1,4 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as React from 'react';
 import {StyleSheet,FlatList, Text, View, Button, Image, ImageBackground, TouchableOpacity, Dimensions} from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
@@ -13,102 +13,11 @@ export default class MainHouseScreen extends React.Component {
         super();
         this.state = {
             districts: [
-                {
-                    "_id": "5edbc393633a4d52a5fc58d9",
-                    "Name": "Đống Đa",
-                    "RoomNumber": 10,
-                    "HouseNumber": 5,
-                    "ImageId": "5ee5acb48b3cb4961fe674c4",
-                    "ImageUrl": "https://live.staticflickr.com/65535/49998629201_6c136b10ac_o.jpg"
-                },
-                {
-                    "_id": "5edbc393633a4d52a5fc58dc",
-                    "Name": "Thanh Xuân",
-                    "RoomNumber": 10,
-                    "HouseNumber": 5,
-                    "ImageId": "5ee5acb48b3cb4961fe674c5",
-                    "ImageUrl": "https://live.staticflickr.com/65535/49998629116_a7634e0f43_o.jpg"
-                },
-                {
-                    "_id": "5edbc393633a4d52a5fc58db",
-                    "Name": "Hà Đông",
-                    "RoomNumber": 10,
-                    "HouseNumber": 5,
-                    "ImageId": "5ee5acb48b3cb4961fe674c6",
-                    "ImageUrl": "https://live.staticflickr.com/65535/50004149582_6b91179faa_o.jpg"
-                },
-                {
-                    "_id": "5edbc393633a4d52a5fc58da",
-                    "Name": "Cầu Giấy",
-                    "RoomNumber": 10,
-                    "HouseNumber": 5,
-                    "ImageId": "5ee5acb48b3cb4961fe674c3",
-                    "ImageUrl": "https://live.staticflickr.com/65535/49999422362_3ed48af520_o.jpg"
-                },
-                {
-                    "_id": "5ee5995c8b3cb4961fe674c1",
-                    "Name": "Bắc Từ Liêm",
-                    "RoomNumber": 10,
-                    "HouseNumber": 5,
-                    "ImageId": "5ee5acb48b3cb4961fe674c7",
-                    "ImageUrl": "https://live.staticflickr.com/65535/50003369828_50ccdd51f3_o.jpg"
-                },
-                {
-                    "_id": "5ee5995c8b3cb4961fe674c2",
-                    "Name": "Nam Từ Liêm",
-                    "RoomNumber": 10,
-                    "HouseNumber": 5,
-                    "ImageId": "5ee5acb48b3cb4961fe674c8",
-                    "ImageUrl": "https://live.staticflickr.com/65535/50003368138_43ffb99b64_o.jpg"
-                }
             ],
             rooms: [
-                {
-                    "_id": "5edbc4a5633a4d52a5fc58dd",
-                    "DistrictId": "5edbc393633a4d52a5fc58d9",
-                    "Name": "Nhà số 17 ngõ 38 Ngô Sỹ Liên",
-                    "RoomNumber": 11,
-                    "Address": "Nhà số 17 ngõ 38 Ngô Sỹ Liên, Văn Miếu, Đống Đa",
-                    "PriceFrom": 2000000,
-                    "PriceTo": 3800000,
-                    "AvatarId": "5ee5b8678b3cb4961fe674c9",
-                    "AvatarUrl": "https://live.staticflickr.com/65535/49976872231_274943d9d1_o.jpg"
-                },
-                {
-                    "_id": "5edbc4a5633a4d52a5fc58dd1",
-                    "DistrictId": "5edbc393633a4d52a5fc58d9",
-                    "Name": "Nhà số 17 ngõ 38 Ngô Sỹ Liên",
-                    "RoomNumber": 11,
-                    "Address": "Nhà số 17 ngõ 38 Ngô Sỹ Liên, Văn Miếu, Đống Đa",
-                    "PriceFrom": 2000000,
-                    "PriceTo": 3800000,
-                    "AvatarId": "5ee5b8678b3cb4961fe674c9",
-                    "AvatarUrl": "https://live.staticflickr.com/65535/49976872231_274943d9d1_o.jpg"
-                },
-                {
-                    "_id": "5edbc4a5633a4d52a5fc58dd12",
-                    "DistrictId": "5edbc393633a4d52a5fc58d9",
-                    "Name": "Nhà số 17 ngõ 38 Ngô Sỹ Liên",
-                    "RoomNumber": 11,
-                    "Address": "Nhà số 17 ngõ 38 Ngô Sỹ Liên, Văn Miếu, Đống Đa",
-                    "PriceFrom": 2000000,
-                    "PriceTo": 3800000,
-                    "AvatarId": "5ee5b8678b3cb4961fe674c9",
-                    "AvatarUrl": "https://live.staticflickr.com/65535/49976872231_274943d9d1_o.jpg"
-                },
-                {
-                    "_id": "22fffff",
-                    "DistrictId": "5edbc393633a4d52a5fc58d9",
-                    "Name": "Nhà số 17 ngõ 38 Ngô Sỹ Liên",
-                    "RoomNumber": 11,
-                    "Address": "Nhà số 17 ngõ 38 Ngô Sỹ Liên, Văn Miếu, Đống Đa",
-                    "PriceFrom": 2000000,
-                    "PriceTo": 3800000,
-                    "AvatarId": "5ee5b8678b3cb4961fe674c9",
-                    "AvatarUrl": "https://live.staticflickr.com/65535/49976872231_274943d9d1_o.jpg"
-                }
             ],
             houses: [],
+            isShowReload: false
         };
         this.districtService = new DistrictService();
         this.roomService = new RoomService();
@@ -116,20 +25,28 @@ export default class MainHouseScreen extends React.Component {
     callApi = () => {
         this.districtService.getList().then((res) => {
             this.setState({districts: res})
+            if (!res || res.length == 0) {
+                this.setState({
+                    isShowReload: true
+                });
+            }
         });
         this.roomService.getList().then((res) => {
             this.setState({rooms: res})
         })
+
     }
     componentDidMount = (): void => {
         // this.districtService.getList().then((res) => {
         //     this.setState({districts: res})
         // })
-        // this.callApi();
+        this.callApi();
     }
 
     render() {
+        let {isShowReload} = this.state;
         return (
+
             <ScrollView>
                 <View style={styles.container}>
                     <Text style={styles.districtTitle}>{'Danh sách các quận'}</Text>
@@ -151,6 +68,9 @@ export default class MainHouseScreen extends React.Component {
                         numColumns={2}
                     />
                 </View>
+                {isShowReload && <View style={styles.reloadIcon}>
+                    <MaterialCommunityIcons name="reload" size={80} color="black"/>
+                </View>}
             </ScrollView>
         )
     }
@@ -200,7 +120,7 @@ export default class MainHouseScreen extends React.Component {
                 </ImageBackground>
                 <View style={{marginLeft: 10}}>
                     <View>
-                        <Text style={styles.priceTitle}>{'Giá: ' + makePriceInVND(1500000)}</Text>
+                        <Text style={styles.priceTitle}>{'Giá: ' + makePriceInVND(item.PriceFrom)}</Text>
                     </View>
                     <View>
                         <Text style={styles.nameTitle}>{item.Name}</Text>
@@ -294,5 +214,10 @@ const styles = StyleSheet.create({
     addressTitle: {
         color: '#6D4C41',
         fontSize: 12
+    },
+    reloadIcon: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 });
