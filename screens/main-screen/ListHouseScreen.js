@@ -4,10 +4,10 @@ import {
     ImageBackground
 } from "react-native";
 import React from "react";
-import Toast, {DURATION} from 'react-native-easy-toast'
 import {RouterPath} from "../../constants/Router";
 import {makePriceString} from "../../constants/Helper";
 import HouseService from "../../services/house.service";
+import ToastService from "../../services/toast.service";
 
 export default class ListHouseScreen extends React.Component {
     constructor() {
@@ -52,45 +52,21 @@ export default class ListHouseScreen extends React.Component {
         }
 
         this.houseService = new HouseService();
+        this.toastService = new ToastService();
     }
 
     componentDidMount = (): void => {
         const {district} = this.props.route.params;
-        // this.setState({
-        //     ...this.state,
-        //     houses: [{
-        //         "_id": "5edbc393633a4d52a5fc58d9",
-        //         "Name": "Đống Đa",
-        //         "RoomNumber": 10,
-        //         "HouseNumber": 5,
-        //         "ImageId": "5ee3ac351577dd2b3f853215"
-        //     }, {
-        //         "_id": "5edbc393633a4d52a5fc58dc",
-        //         "Name": "Thanh Xuân",
-        //         "RoomNumber": 10,
-        //         "HouseNumber": 5
-        //     }, {
-        //         "_id": "5edbc393633a4d52a5fc58db",
-        //         "Name": "Hà Đông",
-        //         "RoomNumber": 10,
-        //         "HouseNumber": 5
-        //     }, {
-        //         "_id": "5edbc393633a4d52a5fc58da",
-        //         "Name": "Cầu Giấy",
-        //         "RoomNumber": 10,
-        //         "HouseNumber": 5
-        //     }]
-        // })
+
         this.houseService.getList(district)
             .then()
             .catch((error) => {
-                this.refs.toast.show('error !');
+                this.toastService.error('Đã có lỗi xảy ra, vui lòng thử lại');
             })
-        this.refs.toast.show('error !');
+
     }
 
     callApi = () => {
-        this.refs.toast.show('error !');
     }
 
     render(): React.ReactNode {
@@ -109,7 +85,6 @@ export default class ListHouseScreen extends React.Component {
                         numColumns={1}
                     />
                 </View>
-                <Toast ref="toast"/>
             </ScrollView>
         )
     }
