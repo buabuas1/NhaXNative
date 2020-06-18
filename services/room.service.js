@@ -24,6 +24,21 @@ class RoomService {
             });
     }
 
+    async getRoomsByHouseId(houseId) {
+        return axios.get(this.config.apiUrl + '/api/room', {params: {
+                HouseId: houseId
+            }})
+            .then(response => {
+                if (!response.statusText === 'OK') {
+                    this.handleResponseError(response);
+                }
+                return response.data;
+            })
+            .catch(error => {
+                this.handleError(error);
+            });
+    }
+
     handleResponseError(response) {
         throw new Error("HTTP error, status = " + response.status);
     }

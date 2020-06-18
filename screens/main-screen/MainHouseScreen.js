@@ -68,9 +68,9 @@ export default class MainHouseScreen extends React.Component {
                         numColumns={2}
                     />
                 </View>
-                {isShowReload && <View style={styles.reloadIcon}>
+                {isShowReload && <TouchableOpacity style={styles.reloadIcon} onPress={this.callApi}>
                     <MaterialCommunityIcons name="reload" size={80} color="black"/>
-                </View>}
+                </TouchableOpacity>}
             </ScrollView>
         )
     }

@@ -11,8 +11,23 @@ class HouseService {
         }
     }
 
-    async getList(itemLink) {
+    async getList() {
         return axios.get(this.config.apiUrl + '/api/house')
+            .then(response => {
+                if (!response.statusText === 'OK') {
+                    this.handleResponseError(response);
+                }
+                return response.data;
+            })
+            .catch(error => {
+                this.handleError(error);
+            });
+    }
+
+    async getListByDistrict(district) {
+        return axios.get(this.config.apiUrl + '/api/house', {params: {
+                districtId: district._id
+            }})
             .then(response => {
                 if (!response.statusText === 'OK') {
                     this.handleResponseError(response);

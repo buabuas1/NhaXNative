@@ -6,39 +6,13 @@ import {
 import React from "react";
 import {Modal} from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
-import { EvilIcons } from '@expo/vector-icons';
+import {EvilIcons, Ionicons} from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import {Linking} from 'react-native'
 import TabBarIcon from "../../components/TabBarIcon";
 import {formatNumber, makeHostTitle, makePriceString, makeSquareString} from "../../constants/Helper";
 import {FacilityType} from "../../constants/Constant";
 let propRooms = {};
-const images = [{
-    // Simplest usage.
-    url: '"https://live.staticflickr.com/65535/49977139892_9640f4c127_k.jpg"',
-
-    // width: number
-    // height: number
-    // Optional, if you know the image size, you can set the optimization performance
-
-    // You can pass props to <Image />.
-    props: {
-        // headers: ...
-    }
-},
-    {
-        url: 'https://live.staticflickr.com/65535/49977140202_3e6bfbe948_k.jpg',
-    },
-    {
-        url: 'https://live.staticflickr.com/65535/49977140097_55ab88a0c7_k.jpg',
-    },
-    {
-        url: 'https://live.staticflickr.com/65535/49977139412_04ac207104_k.jpg',
-    },
-    {
-        url: 'https://live.staticflickr.com/65535/49977137872_c3f524e2cb_k.jpg',
-    }
-]
 
 export default class RoomDetailScreen extends React.Component {
     constructor() {
@@ -61,6 +35,13 @@ export default class RoomDetailScreen extends React.Component {
         const images = room && room.ImageUrls && room.ImageUrls.map((i) => {return {url: i.Url}});
         return (
             <ScrollView>
+                <View style={styles.wrapBack}>
+                    <TouchableOpacity style={styles.BackButton} onPress={this.goBack}>
+                        <Ionicons name="ios-arrow-round-back" size={30} color="black" />
+                    </TouchableOpacity>
+                    <Text style={styles.roomHead}>{'Chi tiết phòng'}</Text>
+                    <Text style={styles.BackButton}></Text>
+                </View>
                 <View style={styles.container}>
                     <FlatList
                         data={room.ImageUrls}
@@ -177,6 +158,9 @@ export default class RoomDetailScreen extends React.Component {
             index: index
         })
     }
+    goBack = () => {
+        this.props.navigation.goBack();
+    }
 
     renderFacilities = (item) => {
         switch (item.Type) {
@@ -248,9 +232,15 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     descriptionRoom: {},
+    roomHead: {
+        fontSize: 18,
+        color: '#ac897e',
+        width: '80%',
+        textAlign: 'center'
+    },
     roomName: {
         fontSize: 30,
-        color: '#6D4C41'
+        color: '#6D4C41',
     },
     houseName: {
         fontSize: 20,
@@ -329,5 +319,9 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         borderRadius: 10,
         paddingBottom: 15
-    }
+    },
+    wrapBack: {
+        flex: 1,
+        flexDirection: 'row'
+    },
 });

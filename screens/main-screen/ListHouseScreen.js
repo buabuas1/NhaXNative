@@ -3,6 +3,7 @@ import {
     TouchableOpacity, Dimensions, StyleSheet,
     ImageBackground
 } from "react-native";
+import { Ionicons } from '@expo/vector-icons';
 import React from "react";
 import {RouterPath} from "../../constants/Router";
 import {makePriceString} from "../../constants/Helper";
@@ -58,8 +59,10 @@ export default class ListHouseScreen extends React.Component {
     componentDidMount = (): void => {
         const {district} = this.props.route.params;
 
-        this.houseService.getList(district)
-            .then()
+        this.houseService.getListByDistrict(district)
+            .then(res => {
+                this.setState({houses: res})
+            })
             .catch((error) => {
                 this.toastService.error('Đã có lỗi xảy ra, vui lòng thử lại');
             })
@@ -69,13 +72,23 @@ export default class ListHouseScreen extends React.Component {
     callApi = () => {
     }
 
+    goBack = () => {
+        this.props.navigation.goBack();
+    }
+
     render(): React.ReactNode {
         console.log(this.props);
         const {district} = this.props.route.params;
         const {navigation} = this.props;
         return (
-            <ScrollView onScroll={this.callApi}>
-                <Text style={styles.districtName}>{district.Name}</Text>
+            <ScrollView onScroll={this.callApi} contentContainerStyle={styles.contentContainerStyle}>
+                <View style={styles.wrapBack}>
+                    <TouchableOpacity style={styles.BackButton} onPress={this.goBack}>
+                        <Ionicons name="ios-arrow-round-back" size={30} color="black" />
+                    </TouchableOpacity>
+                    <Text style={styles.districtName}>{district.Name}</Text>
+                    <Text style={styles.BackButton}></Text>
+                </View>
                 <View style={styles.container}>
                     <FlatList
                         data={this.state.houses}
@@ -120,6 +133,16 @@ export default class ListHouseScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    contentContainerStyle: {
+        marginLeft: 10
+    },
+    wrapBack: {
+        flex: 1,
+        flexDirection: 'row'
+    },
+    BackButton: {
+        width: 30
+    },
     container: {
         flexDirection: 'row',
         flexWrap: 'wrap',
@@ -157,6 +180,9 @@ const styles = StyleSheet.create({
         color: "blue",
         fontSize: 18,
         fontWeight: "bold",
+        // marginLeft: (Dimensions.get('window').width) * 1/2 - 80,
+        textAlign: 'center',
+        width: '80%'
     },
     left: {
         // backgroundColor: 'red',
