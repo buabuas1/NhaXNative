@@ -7,7 +7,7 @@ export default class Fixed extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.tbar}>
-                    <Text style={styles.text}>{'Fixed top bar'}</Text>
+                    <Text style={styles.text}>{'ElectricPrice'}</Text>
                 </View>
             </View>
         );

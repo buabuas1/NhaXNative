@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     descriptionRoom: {
     },
     districtName: {
-        color: "blue",
+        color: "#03A9F4",
         fontSize: 18,
         fontWeight: "bold",
         // marginLeft: (Dimensions.get('window').width) * 1/2 - 80,

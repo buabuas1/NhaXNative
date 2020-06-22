@@ -3,7 +3,10 @@ export function formatNumber(num) {
 }
 
 export function makePriceString(from, to) {
-    if (!from) {
+    if (!from && !to) {
+        return '-';
+    }
+    else if (!from) {
         return formatNumber(to);
     } else if (!to) {
         return formatNumber(from);
