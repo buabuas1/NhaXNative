@@ -247,7 +247,7 @@ export default class RoomDetailScreen extends React.Component {
                 break;
             case FacilityType.MAKEUP_TABLE:
                 return <View style={styles.facilityWrapper}>
-                    <ImageBackground  source={require('../../assets/images/makeup.png')}
+                    <ImageBackground  source={require('../../assets/images/makeup-table1.png')}
                                       style={styles.facilityItem}/>
                     <Text style={styles.facilityText}>{'Bàn trang điểm'}</Text>
                 </View>
@@ -359,13 +359,13 @@ const styles = StyleSheet.create({
         height: (Dimensions.get('window').width - 100) * 1/5,
         alignItems: 'center',
         flexGrow: 3,
-        margin: 5,
+        marginTop: 5,
         fontSize: 10,
         // backgroundColor: 'red'
     },
     facilityWrapper: {
         width: (Dimensions.get('window').width -100) * 1/4,
-        height: (Dimensions.get('window').width - 50) * 1/4,
+        height: (Dimensions.get('window').width - 70) * 1/4,
         alignItems: 'center',
         flexGrow: 3,
         fontSize: 10,

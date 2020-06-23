@@ -105,8 +105,8 @@ export default class MainHouseScreen extends React.Component {
             <TouchableOpacity
                 key={item._id}
                 style={styles.room}
-                onPress={() => {this.props.navigation.navigate(RouterPath.HOUSE_DETAIL_SCREEN, {
-                    house: item
+                onPress={() => {this.props.navigation.navigate(RouterPath.ROOM_DETAIL_SCREEN, {
+                    room: item
                 })}}
             >
                 <ImageBackground
