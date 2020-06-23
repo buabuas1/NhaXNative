@@ -4,7 +4,7 @@ import {StyleSheet,FlatList, Text, View, Button, Image, ImageBackground, Touchab
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import {RouterPath} from "../../constants/Router";
 import DistrictService from "../../services/district.service";
-import RoomService from "../../services/room.service";
+import TrendingRoomService from "../../services/trending-room.service";
 import {makePriceInVND, makePriceString} from "../../constants/Helper";
 const roomWidth = 6;
 const roomHeight = 4;
@@ -20,7 +20,7 @@ export default class MainHouseScreen extends React.Component {
             isShowReload: false
         };
         this.districtService = new DistrictService();
-        this.roomService = new RoomService();
+        this.trendingRoomService = new TrendingRoomService();
     }
     callApi = () => {
         this.districtService.getList().then((res) => {
@@ -31,7 +31,7 @@ export default class MainHouseScreen extends React.Component {
                 });
             }
         });
-        this.roomService.getList().then((res) => {
+        this.trendingRoomService.getList().then((res) => {
             this.setState({rooms: res})
         })
 
@@ -106,7 +106,8 @@ export default class MainHouseScreen extends React.Component {
                 key={item._id}
                 style={styles.room}
                 onPress={() => {this.props.navigation.navigate(RouterPath.ROOM_DETAIL_SCREEN, {
-                    room: item
+                    room: item,
+                    house: item.House
                 })}}
             >
                 <ImageBackground
