@@ -1,15 +1,15 @@
 
-export const prodUrl = "https://someapp.herokuapp.com";
+export const prodUrl = "https://nhaxbe.herokuapp.com";
 
 const ENV = {
     dev: {
-        apiUrl: "http://localhost:4040"
+        apiUrl: "https://nhaxbe.herokuapp.com"
     },
     staging: {
-        apiUrl: "http://localhost:4040"
+        apiUrl: "https://nhaxbe.herokuapp.com"
     },
     prod: {
-        apiUrl: "http://localhost:4040"
+        apiUrl: "https://nhaxbe.herokuapp.com"
     }
 };
 
