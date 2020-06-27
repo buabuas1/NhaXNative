@@ -207,12 +207,12 @@ const styles = StyleSheet.create({
     nameTitle: {
         color: 'black',
         marginTop: 10,
-        fontSize: 20,
+        fontSize: 16,
         fontWeight: 'bold'
     },
     addressTitle: {
         color: 'gray',
         marginTop: 10,
-        fontSize: 10
+        fontSize: 9
     }
 });
