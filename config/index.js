@@ -1,5 +1,5 @@
 
-export const prodUrl = "https://nhaxbe.herokuapp.com";
+export const prodUrl = "192.168.30.102:4040";
 
 const ENV = {
     dev: {

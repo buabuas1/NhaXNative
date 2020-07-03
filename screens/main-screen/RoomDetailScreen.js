@@ -10,7 +10,7 @@ import {EvilIcons, Ionicons} from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import {Linking} from 'react-native'
 import TabBarIcon from "../../components/TabBarIcon";
-import {formatNumber, makeHostTitle, makePriceString, makeSquareString} from "../../constants/Helper";
+import {formatNumber, makeHostTitle, makePriceInVND, makePriceString, makeSquareString} from "../../constants/Helper";
 import {FacilityType} from "../../constants/Constant";
 let propRooms = {};
 
@@ -88,7 +88,7 @@ export default class RoomDetailScreen extends React.Component {
         return (
             <View style={{'marginTop': 30}}>
                 <View style={styles.priceSquare}>
-                    <Text style={styles.priceTitle}>{'Giá: '+ makePriceString(room.PriceFrom)}</Text>
+                    <Text style={styles.priceTitle}>{'Giá: '+ makePriceInVND(room.PriceFrom)}</Text>
                     <Text style={styles.squareTitle}>{'Diện tích: '+ makeSquareString(room.Square)}</Text>
                 </View>
                 <View style={styles.priceSquare}>

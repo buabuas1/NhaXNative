@@ -61,7 +61,7 @@ function getHeaderTitle(route) {
     console.log(route);
     switch (routeName) {
         case 'Home':
-            return 'Nhà X';
+            return 'Happy House';
         case 'Links':
             return 'Links to learn more';
         case 'Nhắn tin':
@@ -71,6 +71,6 @@ function getHeaderTitle(route) {
         case 'Khuyến mại':
             return 'Khuyến mại';
         case 'House':
-            return 'Tìm phòng';
+            return 'Tìm phòng - Happy House';
     }
 }
