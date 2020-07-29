@@ -3,11 +3,10 @@ import * as React from 'react';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
 import MessageScreen from '../screens/MessageScreen';
 import UserAccountScreen from '../screens/UserAccountScreen';
-import PromotionScreen from '../screens/PromotionScreen';
-import MainHouseScreen from '../screens/main-screen/MainHouseScreen';
+import PromotionStack from "../screens/PromotionScreen";
+import {Button} from "react-native";
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -29,8 +28,8 @@ export default function BottomTabNavigator({navigation, route}) {
                 }}
             />
             <BottomTab.Screen
-                name="Khuyến mại"
-                component={PromotionScreen}
+                name="Promotion"
+                component={PromotionStack}
                 options={{
                     title: 'Khuyến mại',
                     tabBarIcon: ({focused}) => <TabBarIcon focused={focused} name="ios-gift"/>,
@@ -68,7 +67,7 @@ function getHeaderTitle(route) {
             return 'Nhắn tin với Admin';
         case 'Tài khoản':
             return 'Tài khoản';
-        case 'Khuyến mại':
+        case 'Promotion':
             return 'Khuyến mại';
         case 'House':
             return 'Tìm phòng - Happy House';
