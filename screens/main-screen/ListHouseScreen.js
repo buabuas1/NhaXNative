@@ -77,7 +77,6 @@ export default class ListHouseScreen extends React.Component {
     }
 
     render(): React.ReactNode {
-        console.log(this.props);
         const {district} = this.props.route.params;
         const {navigation} = this.props;
         return (

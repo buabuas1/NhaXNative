@@ -27,7 +27,6 @@ export default class RoomDetailScreen extends React.Component {
     }
 
     render(): React.ReactNode {
-        console.log(this.props);
         const {room, house} = this.props.route.params;
         propRooms = room;
         const {navigation} = this.props;
