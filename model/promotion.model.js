@@ -6,4 +6,5 @@ export class PromotionModel {
     "Condition": string;
     "StartTime": Date;
     "EndTime": Date;
+    "Name": string;
 }

@@ -40,7 +40,14 @@ export default class MainHouseScreen extends React.Component {
         // this.districtService.getList().then((res) => {
         //     this.setState({districts: res})
         // })
+        this._unsubscribe = this.props.navigation.addListener('focus', () => {
+            this.callApi();
+        });
         this.callApi();
+    }
+
+    componentWillUnmount(): void {
+        this._unsubscribe();
     }
 
     render() {

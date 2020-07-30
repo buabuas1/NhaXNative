@@ -38,3 +38,8 @@ export function makeHostTitle(host) {
         return '-';
     }
 }
+
+export function makeStringDate(d: string) {
+    let date = new Date(d);
+    return '' + date.getDate() + '-'  + (date.getMonth() + 1) + '-' + date.getFullYear()
+}

@@ -10,7 +10,6 @@ import ToastService from "../services/toast.service";
 import {createStackNavigator} from "@react-navigation/stack";
 import MainHouseScreen from "./main-screen/MainHouseScreen";
 import PromotionDetailScreen from "./promotion/PromotionDetailScreen";
-
 const Stack = createStackNavigator();
 
 export default function PromotionStack() {
@@ -39,13 +38,23 @@ export class PromotionScreen extends React.Component {
     }
 
     componentDidMount(): void {
+        this._unsubscribe = this.props.navigation.addListener('focus', () => {
+            this.callApi();
+        });
+        this.callApi();
+    }
+
+    componentWillUnmount(): void {
+        this._unsubscribe();
+    }
+
+    callApi = () => {
         this.promotionService.getList()
             .then(res => this.setState({
                 promotions: res
             }))
             .catch(err => this.toastService.error(JSON.stringify(err)))
     }
-
     render(): React.ReactNode {
         const {promotions} = this.state;
         return (
@@ -81,7 +90,7 @@ export class PromotionScreen extends React.Component {
                         resizeMethod="resize"
                     />
                     <View>
-                        <Text>{item.Description}</Text>
+                        <Text style={styles.prmName}>{item.Name}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -127,13 +136,18 @@ const styles = StyleSheet.create({
     },
     descriptionPromotion: {
         width: (Dimensions.get('window').width - 10),
-        height: (Dimensions.get('window').width + 150) * 2.5/6,
-        borderBottomColor: 'gray',
-        borderBottomWidth: 2,
+        height: (Dimensions.get('window').width + 150) * 2.3/6,
         // color: "#5D4037",
     },
     displayNone: {
         opacity: 0,
         height: 0
-    }
+    },
+    prmName: {
+        marginTop: 10,
+        textAlign: 'center',
+        fontSize: 18,
+        borderBottomColor: 'gray',
+        borderBottomWidth: 1,
+    },
 });
